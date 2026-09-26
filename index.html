@@ -822,7 +822,7 @@
                 if (state.boss.state === 'idle') {
                     state.boss.y = 200 + Math.sin(state.frameCount * 0.05) * 50;
                     state.boss.timer++;
-                    if (state.boss.timer > 180) { state.boss.state = Math.random() > 0.5 ? 'advance' : 'fire'; state.boss.timer = 0; }
+                    if (state.boss.timer > 240) { state.boss.state = Math.random() > 0.5 ? 'advance' : 'fire'; state.boss.timer = 0; }
                 } else if (state.boss.state === 'advance') {
                     state.boss.x -= 5;
                     if (state.boss.x < 100) { state.boss.state = 'retreat'; }
@@ -832,7 +832,7 @@
                 } else if (state.boss.state === 'fire') {
                     if (state.boss.timer === 0) { // One shot per attack cycle to ease Level 2 difficulty.
                         const angle = Math.atan2(state.hunter.y - (state.boss.y + 40), state.hunter.x - state.boss.x);
-                        state.bossAttacks.push({ x: state.boss.x, y: state.boss.y + 40, vx: Math.cos(angle) * 15, vy: Math.sin(angle) * 15, w: 30, h: 10, type: 'blue_beam', angle: angle });
+                        state.bossAttacks.push({ x: state.boss.x, y: state.boss.y + 40, vx: Math.cos(angle) * 12, vy: Math.sin(angle) * 12, w: 30, h: 10, type: 'blue_beam', angle: angle });
                     }
                     state.boss.timer++;
                     if (state.boss.timer > 60) { state.boss.state = 'idle'; state.boss.timer = 0; }
