@@ -839,11 +839,25 @@
                     if (state.boss.timer > 60) { state.boss.state = 'idle'; state.boss.timer = 0; }
                 }
 
-                // Spawn a small star at a random ground position after 10 seconds.
+                // Uncollected stars move to a different random position every 15 seconds.
+                state.healingStars.forEach(star => {
+                    star.life--;
+                    if (star.life <= 0) {
+                        const spawnRange = width - 140;
+                        let nextX = 60 + Math.random() * spawnRange;
+                        if (Math.abs(nextX - star.x) < 80) {
+                            nextX = 60 + ((nextX - 60 + spawnRange / 2) % spawnRange);
+                        }
+                        star.x = nextX;
+                        star.life = 900;
+                    }
+                });
+
+                // Spawn a small star after 10 seconds initially and after each pickup.
                 if (state.healingStars.length === 0) {
                     state.healingStarTimer++;
                     if (state.healingStarTimer >= 600) {
-                        state.healingStars.push({ x: 60 + Math.random() * (width - 140), y: GROUND_LEVEL - 22, w: 20, h: 20 });
+                        state.healingStars.push({ x: 60 + Math.random() * (width - 140), y: GROUND_LEVEL - 22, w: 20, h: 20, life: 900 });
                         state.healingStarTimer = 0;
                     }
                 }
