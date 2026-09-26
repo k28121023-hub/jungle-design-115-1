@@ -921,7 +921,7 @@
                 // Collect after damage so a star cannot revive a defeated player.
                 state.healingStars = state.healingStars.filter(star => {
                     if (state.currentHp > 0 && state.currentHp < 100 && rectIntersect(state.hunter, star)) {
-                        state.currentHp = Math.min(100, state.currentHp + 5);
+                        state.currentHp = Math.min(100, state.currentHp + 20);
                         setHp(state.currentHp);
                         state.healingStarTimer = 0;
                         for (let i = 0; i < 10; i++) {
